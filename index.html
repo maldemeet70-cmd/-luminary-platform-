@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Luminary — Create. Market. Sell.</title>
+<meta name="description" content="Luminary is the all-in-one digital business platform for creators, marketers, and entrepreneurs. Create content, run campaigns, and sell digital products."/>
+<link rel="stylesheet" href="styles.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner" id="promoBanner">
+  🚀 <strong>Black Friday Deal:</strong> Get 50% OFF all plans with code <strong>LUMINARY50</strong> — Ends Sunday!
+  <button onclick="document.getElementById('promoBanner').remove()" style="background:rgba(255,255,255,.3);border:none;color:#fff;padding:.2rem .6rem;border-radius:6px;cursor:pointer;margin-left:.5rem">✕</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo">✦ Luminary</div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#store">Store</a></li>
+    <li><a href="#marketing">Blog</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#analytics">Dashboard</a></li>
+    <li><a href="#feedback">Feedback</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn btn-ghost" onclick="openModal('loginModal')">Sign In</button>
+    <button class="btn btn-primary" onclick="openModal('signupModal')">Get Started</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌟 The #1 Digital Business Platform</div>
+    <h1>Create. <span>Market.</span> Sell.<br/>Everything in One Place.</h1>
+    <p>Luminary unifies content creation, AI-powered marketing, and e-commerce into a single seamless platform — built for creators and entrepreneurs who demand the best.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary btn-lg" onclick="openModal('signupModal')">Start For Free →</button>
+      <button class="btn btn-ghost btn-lg" onclick="document.getElementById('store').scrollIntoView({behavior:'smooth'})">Browse Store</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num" id="countUsers">0</div><div class="stat-label">Active Creators</div></div>
+      <div><div class="stat-num" id="countProducts">0</div><div class="stat-label">Products Sold</div></div>
+      <div><div class="stat-num" id="countRevenue">0</div><div class="stat-label">Revenue Generated</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrapper">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-badge">Platform Features</span>
+      <h2 class="section-title">Everything Your <span>Business Needs</span></h2>
+      <p class="section-sub">From idea to income — create, promote, and sell without switching tools.</p>
+    </div>
+    <div class="grid-3 fade-in">
+      <div class="card">
+        <div class="card-icon icon-purple">✍️</div>
+        <h3>Content Studio</h3>
+        <p>Create stunning eBooks, photo collages, and animated content with our drag-and-drop builder.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-cyan">📣</div>
+        <h3>Smart Marketing</h3>
+        <p>AI-generated campaigns, email sequences, blog storytelling, and social media scheduling.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-amber">🛒</div>
+        <h3>Digital Storefront</h3>
+        <p>Launch your store in minutes. Sell eBooks, music, videos, and courses — globally.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-pink">🤖</div>
+        <h3>AI Assistant</h3>
+        <p>24/7 chatbot handles queries, recommends products, and nurtures leads automatically.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-green">📊</div>
+        <h3>Analytics Dashboard</h3>
+        <p>Real-time insights on sales, traffic, conversions, and audience behavior.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-purple">🎮</div>
+        <h3>Rewards & Gamification</h3>
+        <p>Earn points, unlock badges, and redeem rewards to stay motivated and grow faster.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORE -->
+<section id="store" style="background:var(--bg2)">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-badge">Digital Store</span>
+      <h2 class="section-title">Browse Our <span>Digital Products</span></h2>
+      <p class="section-sub">Handcrafted digital goods built by top creators on the platform.</p>
+    </div>
+    <div class="tabs fade-in">
+      <button class="tab active" onclick="filterProducts('all',this)">All Products</button>
+      <button class="tab" onclick="filterProducts('ebook',this)">📖 eBooks</button>
+      <button class="tab" onclick="filterProducts('music',this)">🎵 Music</button>
+      <button class="tab" onclick="filterProducts('photo',this)">🖼️ Photo Packs</button>
+      <button class="tab" onclick="filterProducts('video',this)">🎬 Videos</button>
+    </div>
+    <div class="grid-4 fade-in" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- MARKETING / BLOG -->
+<section id="marketing">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-badge">Marketing Hub</span>
+      <h2 class="section-title">Stories That <span>Sell</span></h2>
+      <p class="section-sub">Product storytelling, campaign insights, and creator journeys.</p>
+    </div>
+    <!-- VIDEO PROMO -->
+    <div class="video-promo fade-in" style="margin-bottom:3rem">
+      <div class="video-thumb" onclick="playPromo()" id="videoThumb">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2">
+          <div class="play-btn" id="playBtn">▶</div>
+          <p style="color:rgba(255,255,255,.7);margin-top:1rem;font-size:.9rem">Watch: How Luminary Transformed 10,000 Creators</p>
+        </div>
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0f0525,#1e0a3c);z-index:1">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.4;font-size:8rem">🎬</div>
+        </div>
+        <div id="promoVideo" style="display:none;position:absolute;inset:0;z-index:3;background:#000">
+          <video id="bgVideo" autoplay muted loop style="width:100%;height:100%;object-fit:cover;opacity:.6">
+            <source src="" type="video/mp4"/>
+          </video>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff">
+            <div style="font-size:3rem;animation:float-icon 2s ease-in-out infinite">🚀</div>
+            <h2 style="font-family:Outfit,sans-serif;font-size:2rem;font-weight:800;margin:.5rem 0">Luminary Platform</h2>
+            <p style="color:rgba(255,255,255,.7)">The future of digital business is here</p>
+            <div style="display:flex;gap:2rem;margin-top:2rem;font-size:1.2rem;font-weight:700">
+              <span>✦ Create</span><span>✦ Market</span><span>✦ Sell</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="video-info">
+        <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:.5rem">🎬 Luminary Creator Success Stories</h3>
+        <p style="color:var(--text2);font-size:.9rem;line-height:1.6">See how creators like you are using Luminary to build 6-figure digital businesses. Real people, real results, real inspiration.</p>
+      </div>
+    </div>
+    <div class="grid-3 fade-in" id="blogGrid"></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background:var(--bg2)">
+  <div class="container">
+    <div class="fade-in" style="text-align:center">
+      <span class="section-badge">Pricing Plans</span>
+      <h2 class="section-title">Simple, <span>Transparent Pricing</span></h2>
+      <p class="section-sub" style="margin:0 auto 3rem">No hidden fees. Cancel anytime. All plans include a 14-day free trial.</p>
+    </div>
+    <div class="grid-3 fade-in" id="pricingGrid"></div>
+  </div>
+</section>
+
+<!-- ANALYTICS DASHBOARD -->
+<section id="analytics">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-badge">Admin Dashboard</span>
+      <h2 class="section-title">Your Business <span>At a Glance</span></h2>
+      <p class="section-sub">Real-time analytics, revenue tracking, and audience insights.</p>
+    </div>
+    <div class="analytics-grid fade-in" id="metricsGrid"></div>
+    <div class="grid-3 fade-in" style="margin-top:2rem">
+      <div class="chart-bar-container" style="grid-column:span 2">
+        <h3 style="font-weight:700;margin-bottom:.5rem">Monthly Revenue</h3>
+        <p style="font-size:.85rem;color:var(--text2)">Last 8 months performance</p>
+        <div class="chart-bars" id="chartBars"></div>
+      </div>
+      <div class="rewards-card" id="rewardsCard">
+        <h3 style="font-weight:700;margin-bottom:1rem">🎮 Your Rewards</h3>
+        <div class="points-display" id="pointsDisplay">0</div>
+        <p style="font-size:.8rem;color:var(--text2);margin-top:.3rem">Luminary Points</p>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        <p style="font-size:.75rem;color:var(--text3)"><span id="progressLabel">0 / 1000 pts to Gold</span></p>
+        <div id="rewardsList" style="margin-top:1.5rem"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" style="background:var(--bg2)">
+  <div class="container">
+    <div class="fade-in" style="text-align:center">
+      <span class="section-badge">Testimonials</span>
+      <h2 class="section-title">Loved by <span>10,000+ Creators</span></h2>
+    </div>
+    <div class="grid-3 fade-in">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Luminary completely replaced 5 separate tools for me. My revenue jumped 3x in just 3 months. The AI chatbot alone is worth the subscription."</p>
+        <div class="testimonial-author">
+          <img src="testimonial-1.png" alt="Sarah Mitchell" class="author-img"/>
+          <div><div class="author-name">Sarah Mitchell</div><div class="author-role">Digital Creator, New York</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I launched my eBook and music pack in the same week. Sold 200 copies in 48 hours. The analytics dashboard showed me exactly what was working."</p>
+        <div class="testimonial-author">
+          <img src="testimonial-2.png" alt="James Okafor" class="author-img"/>
+          <div><div class="author-name">James Okafor</div><div class="author-role">Music Producer, Lagos</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The gamification system keeps me motivated. I've earned enough points to unlock a full year of the Pro plan. Brilliant idea, flawless execution."</p>
+        <div class="testimonial-author">
+          <img src="testimonial-3.png" alt="Priya Sharma" class="author-img"/>
+          <div><div class="author-name">Priya Sharma</div><div class="author-role">Brand Strategist, Mumbai</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK -->
+<section id="feedback">
+  <div class="container">
+    <div class="feedback-section fade-in">
+      <span class="section-badge">Customer Feedback</span>
+      <h2 class="section-title" style="margin-bottom:.5rem">Share Your <span>Experience</span></h2>
+      <p style="color:var(--text2);margin-bottom:2.5rem;font-size:.9rem">Your feedback helps us build a better platform for everyone.</p>
+      <form id="feedbackForm" onsubmit="submitFeedback(event)" style="max-width:600px;margin:0 auto;text-align:left">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" class="form-control" id="fbName" placeholder="John Doe" required/>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" class="form-control" id="fbEmail" placeholder="john@example.com" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Overall Rating</label>
+          <div class="star-rating">
+            <input type="radio" id="s5" name="rating" value="5"/><label for="s5">★</label>
+            <input type="radio" id="s4" name="rating" value="4"/><label for="s4">★</label>
+            <input type="radio" id="s3" name="rating" value="3"/><label for="s3">★</label>
+            <input type="radio" id="s2" name="rating" value="2"/><label for="s2">★</label>
+            <input type="radio" id="s1" name="rating" value="1"/><label for="s1">★</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Which feature do you love most?</label>
+          <select class="form-control" id="fbFeature">
+            <option value="">Select a feature...</option>
+            <option>AI Chatbot</option>
+            <option>Digital Store</option>
+            <option>Analytics Dashboard</option>
+            <option>Content Studio</option>
+            <option>Rewards System</option>
+            <option>Marketing Hub</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Feedback</label>
+          <textarea class="form-control" id="fbMessage" rows="4" placeholder="Tell us what you think..." required></textarea>
+        </div>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <button type="submit" class="btn btn-primary btn-lg">Submit Feedback ✦</button>
+          <a href="https://forms.gle/exampleFormLink" target="_blank" class="btn btn-ghost btn-lg" style="display:flex;align-items:center;gap:.5rem">📋 Google Form</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- QR BUSINESS CARD -->
+<section id="businesscard" style="background:var(--bg2)">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-badge">Business Card</span>
+      <h2 class="section-title">QR-Enabled <span>Business Card</span></h2>
+      <p class="section-sub">Scan to visit Luminary instantly — perfect for networking.</p>
+    </div>
+    <div class="qr-section fade-in">
+      <div class="qr-code" id="qrContainer"></div>
+      <div style="flex:1;color:#fff">
+        <h3 style="font-family:Outfit,sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:.5rem">✦ Luminary</h3>
+        <p style="font-size:1rem;opacity:.9;margin-bottom:1rem">Create. Market. Sell. — The All-in-One Digital Business Platform</p>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;font-size:.85rem;opacity:.8">
+          <span>🌐 luminary.app</span>
+          <span>📧 hello@luminary.app</span>
+          <span>📱 @luminaryapp</span>
+        </div>
+        <button class="btn" style="margin-top:1.5rem;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff" onclick="downloadCard()">⬇️ Download Business Card</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">✦ Luminary</span>
+        <p>The all-in-one platform for digital creators and entrepreneurs. Create, market, and sell — all from one beautiful dashboard.</p>
+        <div class="social-links">
+          <a class="social-btn" href="#" aria-label="Twitter">𝕏</a>
+          <a class="social-btn" href="#" aria-label="Instagram">📷</a>
+          <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
+          <a class="social-btn" href="#" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#store">Store</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#analytics">Analytics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#marketing">Blog</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Tutorials</a></li>
+          <li><a href="#feedback">Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Luminary Inc. All rights reserved.</span>
+      <span style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600">Built with ❤️ for creators worldwide</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<div class="chatbot-wrapper">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-header-info">
+        <h4>Luminary AI</h4>
+        <p><span class="online-dot"></span>Online — Ready to help</p>
+      </div>
+      <button onclick="toggleChat()" style="margin-left:auto;background:transparent;border:none;color:#fff;cursor:pointer;font-size:1.2rem">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-suggestions" id="chatSuggestions"></div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter')sendMessage()"/>
+      <button class="chat-send" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+  <button class="chat-btn" onclick="toggleChat()" id="chatToggleBtn">💬</button>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ <span id="toastMsg"></span></div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <h2 style="font-family:Outfit,sans-serif;font-weight:800;margin-bottom:.4rem">Welcome Back 👋</h2>
+    <p style="color:var(--text2);font-size:.9rem;margin-bottom:2rem">Sign in to your Luminary account</p>
+    <div class="form-group"><label>Email</label><input type="email" class="form-control" placeholder="you@example.com"/></div>
+    <div class="form-group"><label>Password</label><input type="password" class="form-control" placeholder="••••••••"/></div>
+    <button class="btn btn-primary" style="width:100%;padding:.9rem;font-size:1rem;border-radius:10px;margin-top:.5rem" onclick="loginUser()">Sign In</button>
+    <p style="text-align:center;margin-top:1rem;font-size:.85rem;color:var(--text2)">Don't have an account? <a href="#" onclick="closeModal('loginModal');openModal('signupModal')" style="color:var(--accent)">Sign up</a></p>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div class="modal-overlay" id="signupModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('signupModal')">✕</button>
+    <h2 style="font-family:Outfit,sans-serif;font-weight:800;margin-bottom:.4rem">Join Luminary ✦</h2>
+    <p style="color:var(--text2);font-size:.9rem;margin-bottom:2rem">Start your 14-day free trial. No credit card needed.</p>
+    <div class="form-grid">
+      <div class="form-group"><label>First Name</label><input type="text" class="form-control" placeholder="John"/></div>
+      <div class="form-group"><label>Last Name</label><input type="text" class="form-control" placeholder="Doe"/></div>
+    </div>
+    <div class="form-group"><label>Email</label><input type="email" class="form-control" placeholder="you@example.com"/></div>
+    <div class="form-group"><label>Password</label><input type="password" class="form-control" placeholder="Create a strong password"/></div>
+    <button class="btn btn-primary" style="width:100%;padding:.9rem;font-size:1rem;border-radius:10px;margin-top:.5rem" onclick="signupUser()">Create Free Account →</button>
+    <p style="text-align:center;margin-top:1rem;font-size:.85rem;color:var(--text2)">Already have an account? <a href="#" onclick="closeModal('signupModal');openModal('loginModal')" style="color:var(--accent)">Sign in</a></p>
+  </div>
+</div>
+
+<!-- PURCHASE MODAL -->
+<div class="modal-overlay" id="purchaseModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('purchaseModal')">✕</button>
+    <div style="text-align:center;margin-bottom:1.5rem;font-size:3rem" id="purchaseEmoji">📖</div>
+    <h2 style="font-family:Outfit,sans-serif;font-weight:800;margin-bottom:.3rem" id="purchaseTitle">Product Name</h2>
+    <p style="color:var(--accent2);font-size:1.5rem;font-weight:800;margin-bottom:1.5rem" id="purchasePrice">$29</p>
+    <div class="form-group"><label>Email for delivery</label><input type="email" class="form-control" placeholder="you@example.com" id="purchaseEmail"/></div>
+    <div class="form-group"><label>Card Number</label><input type="text" class="form-control" placeholder="4242 4242 4242 4242" maxlength="19" oninput="formatCard(this)"/></div>
+    <div class="form-grid">
+      <div class="form-group"><label>Expiry</label><input type="text" class="form-control" placeholder="MM/YY" maxlength="5"/></div>
+      <div class="form-group"><label>CVV</label><input type="text" class="form-control" placeholder="123" maxlength="3"/></div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;padding:.9rem;font-size:1rem;border-radius:10px" onclick="completePurchase()">Complete Purchase 🔒</button>
+    <p style="text-align:center;margin-top:.8rem;font-size:.75rem;color:var(--text3)">🔒 256-bit SSL encrypted. Instant digital delivery.</p>
+  </div>
+</div>
+
+<style>
+@keyframes float-icon{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+</style>
+<script src="app.js"></script>
+</body>
+</html>
